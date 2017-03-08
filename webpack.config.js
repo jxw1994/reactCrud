@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var rootPath = "/Users/song/work/react/Mine/tools";
+var rootPath = "D:/github/reactCrud";
 
 module.exports = {
   //记着发布时候要去掉devtools否则打包很大
@@ -9,6 +9,7 @@ module.exports = {
     hot: 'webpack-hot-middleware/client',
     bootstrapCssWrapper: './entry/bootstrap-css',
     editFormGenerator: './entry/editFormGenerator',
+    newEditFormGenerator: './entry/newEditFormGenerator',
     d2EditFormGenerator: './entry/d2EditFormGenerator',
     d3EditFormGenerator: './entry/d3EditFormGenerator',
     d2TaskExpertsGen:'./entry/d2TaskExpertsGen',
@@ -16,9 +17,12 @@ module.exports = {
     dTaskExpertsEditGen: './entry/dTaskExpertsEditGen',
     pageListGenerator: './entry/pageListGenerator',
     dqListGenerator: './entry/dqListGenerator',
-    dqTaskExpert:"./entry/dqTaskExpert"
+    invoiceListGenerator: './entry/invoiceListGenerator',
+    dqTaskExpert:"./entry/dqTaskExpert",
+    standardRespFormGenerator:"./entry/standardRespFormGenerator",
+    reimburseFormGenerator:"./entry/reimburseFormGenerator",
   },
-
+  // entry: "./entry/.*",
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name]-bundle.js',
@@ -38,7 +42,8 @@ module.exports = {
     //会合并大小小于\d b的chunk，但至少会有一个 不会合并到parent中
     new webpack.optimize.MinChunkSizePlugin({minChunkSize: 1000}),
     new webpack.optimize.CommonsChunkPlugin("commonV3.js",["editFormGenerator", "pageListGenerator", "d2EditFormGenerator", "d2TaskExpertsGen", 
-      "d3EditFormGenerator", "d3TaskExpertsGen", "dTaskExpertsEditGen", "dqListGenerator", "dqTaskExpert"]),
+      "d3EditFormGenerator", "d3TaskExpertsGen", "dTaskExpertsEditGen", "dqListGenerator", "dqTaskExpert", "standardRespFormGenerator", "invoiceListGenerator",
+      "reimburseFormGeneratore","newEditFormGenerator"]),
     new webpack.optimize.UglifyJsPlugin({compress:{warnings:false}})
   ],
   module: {
