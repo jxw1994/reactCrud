@@ -3,9 +3,9 @@ import React, {
 	PropTypes
 } from 'react';
 import {Button, FormGroup, FormControl, ControlLabel, Input, Col, HelpBlock, Modal, Checkbox} from 'react-bootstrap';
-import ObjectUtil from '../util/ObjectUtil';
-import DateUtil from '../util/DateUtil';
-import {SimpleRow, SelectGroup, CityValuePairRow, ComplexRow, HintInput, SelectAddableRow, SelectAddHintRow, HintGroupRow} from './EditableRow'
+import ObjectUtil from '../../util/ObjectUtil';
+import DateUtil from '../../util/DateUtil';
+import {SimpleRow} from './Row'
 
 class EditForm extends Component {
 	constructor(props) {
@@ -33,9 +33,11 @@ class EditForm extends Component {
 			    }
 			});
 		}else if(this.props.method == "post"){
+			console.log("componentDidMount");
 			var formInit = this.props.formInit;
 			ObjectUtil.mergeData(formInit, this.props.formExtend);
 			this.setState({data: formInit});
+			console.log(formInit);
 		}
 	}
 	default_success_callback(data){
@@ -122,26 +124,7 @@ class EditForm extends Component {
 	genRows(data){
 		var that = this;
 		return data.map(function(row){
-			if(row.selectGroup){
-				return <SelectGroup ref={row.name} {...row}/>
-			}
-			else if(row.group && row.group != "groupList"){
-				return <SelectAddableRow ref={row.name} {...row} selector={that.props.selector[row.group]}/>
-			}				
-			else if (row.type && row.type == "hintgroup") {
-				return <SelectAddHintRow ref={row.name} {...row} selector={that.props.selector[row.group]}/>
-				//console.log("aria");
-			}			
-			else if(row.validator && row.validator.dataType && row.validator.dataType == "location"){
-			    return <CityValuePairRow ref={row.name} {...row}/>
-			}
-			else if(row.type && row.type == "complexRow"){
-				return <ComplexRow ref={row.name} {...row}/>
-			}
-			else if(row.type && row.type=="hint"){
-				return <HintGroupRow ref={row.name} {...row}/>
-			}else
-    			return <SimpleRow ref={row.name} {...row}/> 
+    		return <SimpleRow ref={row.name} {...row}/> 
     	});
 	}
 	//defaut add / modify

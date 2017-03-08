@@ -5,7 +5,7 @@ import React, {
 import {Button, FormGroup, FormControl, ControlLabel, Input, Col, HelpBlock, Modal, Checkbox} from 'react-bootstrap';
 import ObjectUtil from '../util/ObjectUtil';
 import DateUtil from '../util/DateUtil';
-import {SimpleRow, SelectGroup, CityValuePairRow, ComplexRow, HintInput, SelectAddableRow, SelectAddHintRow, HintGroupRow} from './EditableRow'
+import {SimpleRow, SelectGroup, CityValuePairRow, ComplexRow, HintInput, HintGroupRow} from './EditableRow'
 
 class EditForm extends Component {
 	constructor(props) {
@@ -125,13 +125,13 @@ class EditForm extends Component {
 			if(row.selectGroup){
 				return <SelectGroup ref={row.name} {...row}/>
 			}
-			else if(row.group && row.group != "groupList"){
-				return <SelectAddableRow ref={row.name} {...row} selector={that.props.selector[row.group]}/>
-			}				
-			else if (row.type && row.type == "hintgroup") {
-				return <SelectAddHintRow ref={row.name} {...row} selector={that.props.selector[row.group]}/>
-				//console.log("aria");
-			}			
+			// else if(row.group && row.group != "groupList"){
+			// 	return <SelectAddableRow ref={row.name} {...row} selector={that.props.selector[row.group]}/>
+			// }				
+			// else if (row.type && row.type == "hintgroup") {
+			// 	return <SelectAddHintRow ref={row.name} {...row} selector={that.props.selector[row.group]}/>
+			// 	//console.log("aria");
+			// }			
 			else if(row.validator && row.validator.dataType && row.validator.dataType == "location"){
 			    return <CityValuePairRow ref={row.name} {...row}/>
 			}
